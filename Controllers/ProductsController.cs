@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Kursinis.Data;
 using Kursinis.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Kursinis.Controllers
 {
@@ -23,6 +24,16 @@ namespace Kursinis.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _context.Products.ToListAsync());
+        }
+        // GET: ShowSearchForm
+        public async Task<IActionResult> ShowSearchForm()
+        {
+            return View();
+        }
+        // Post: ShowSearchResults
+        public async Task<IActionResult> ShowSearchResults(string SearchPhrase)
+        {
+            return View("Index", await _context.Products.Where( j => j.ItemName.Contains(SearchPhrase)).ToListAsync());
         }
 
         // GET: Products/Details/5
@@ -42,16 +53,17 @@ namespace Kursinis.Controllers
 
             return View(products);
         }
-
+        [Authorize]
         // GET: Products/Create
         public IActionResult Create()
         {
             return View();
         }
-
+        
         // POST: Products/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,ItemName,ItemDescription,Price")] Products products)
@@ -64,7 +76,7 @@ namespace Kursinis.Controllers
             }
             return View(products);
         }
-
+        [Authorize]
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -80,7 +92,7 @@ namespace Kursinis.Controllers
             }
             return View(products);
         }
-
+        [Authorize]
         // POST: Products/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -115,7 +127,7 @@ namespace Kursinis.Controllers
             }
             return View(products);
         }
-
+        [Authorize]
         // GET: Products/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -135,6 +147,7 @@ namespace Kursinis.Controllers
         }
 
         // POST: Products/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
