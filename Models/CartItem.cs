@@ -7,42 +7,15 @@ namespace Kursinis.Models
 {
     public class CartItem
     {
-        public CartItem()
-        {
+        public string ItemId { get; set; }
 
-        }
-        public CartItem(Products item)
-        {
-            ProductItem = item;
-            Quantity = 1;
-        }
-        public Products ProductItem { get; set; }
+        public string CartId { get; set; }
+
         public int Quantity { get; set; }
 
-        public int GetItemId()
-        {
-            return ProductItem.Id;
-        }
+        public int ProductId { get; set; }
 
-        public string GetItemName()
-        {
-            return ProductItem.ItemName;
-        }
+        public virtual Products Product { get; set; }
 
-        public void IncrementItemQuantity()
-        {
-            Quantity = Quantity + 1;
-        }
-
-
-        public double GetPrice()
-        {
-            return ProductItem.Price;
-        }
-
-        public double GetTotalCost()
-        {
-            return Quantity * GetPrice();
-        }
     }
 }
