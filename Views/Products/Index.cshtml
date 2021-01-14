@@ -35,6 +35,11 @@
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 <button class="btn-primary"> Buy </button>
+                <a href="/AddToCart.cshtml?Id=<%#:item.Id %>">
+                    <span class="ProductListItem">
+                        <b>Add To Cart</b>
+                    </span>
+                </a>
             </td>
         </tr>
 }
