@@ -1,4 +1,6 @@
 using Kursinis.Data;
+using Kursinis.Controllers;
+using Kursinis.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,6 +37,8 @@ namespace Kursinis
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddSession();
+            services.AddTransient<IProducts, ProductService>();
+            services.AddScoped(sp => ShoppingCart.GetCart(sp));
 
         }
 

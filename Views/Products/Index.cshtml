@@ -34,12 +34,12 @@
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                <button class="btn-primary"> Buy </button>
-                <a href="/AddToCart.cshtml?Id=<%#:item.Id %>">
-                    <span class="ProductListItem">
-                        <b>Add To Cart</b>
-                    </span>
-                </a>
+                <form asp-controller="ShoppingCart" asp-action="Add" method="get" class="form-horizontal" role="form">
+                    <div class="btn-cart">
+                        <input value="Add to cart" type="submit" class="btn btn-success" asp-controller="ShoppingCart" asp-action="Add" asp-route-id="@item.Id" asp-route-returnUrl="@Context.Request.Path" />
+                    </div>
+                    
+                </form>
             </td>
         </tr>
 }

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Kursinis.Models
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -29,7 +30,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="ShowSearchForm">Search</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="ShoppingCart">Cart</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="ShoppingCart" asp-action="Index">Cart</a>
                         </li>
 
                     </ul>
@@ -51,6 +52,25 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        function changeValue(target, output, total, num) {
+            let val = parseInt(target.value);
+            if (num < 0 && val <= 1) {
+                return;
+            }
+            val += num;
+            target.value = val;
+
+            let totalInt = val * parseFloat(total.substring(1));
+            output.value = ('$' + totalInt).substring(0, 6);
+        }
+
+        function readUrl(input, id) {
+            if (input && input.value) {
+                $('#' + id).attr('src', input.value);
+            }
+        }
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
