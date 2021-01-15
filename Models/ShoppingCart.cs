@@ -39,12 +39,17 @@ namespace Kursinis.Models
 			var isValidAmount = true;
 			if (shoppingCartItem == null)
 			{
+				if (amount >= 0)
+				{
+					isValidAmount = true;
+				}
 				shoppingCartItem = new CartItem
 				{
 					ShoppingCartId = Id,
 					Products = products,
 					Amount = (amount)
 				};
+				
 				_context.ShoppingCartItems.Add(shoppingCartItem);
 			}
 			else
@@ -56,7 +61,7 @@ namespace Kursinis.Models
 				else
 				{
 					shoppingCartItem.Amount += (shoppingCartItem.Amount);
-					isValidAmount = false;
+					isValidAmount = true;
 				}
 			}
 

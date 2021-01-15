@@ -17,6 +17,15 @@ namespace Kursinis.Data
             : base(options)
         {
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<CartItem>()
+                .HasOne(sci => sci.Products);
+
+         
+        }
         public DbSet<Kursinis.Models.Products> Products { get; set; }
         public DbSet<Kursinis.Models.CartItem> ShoppingCartItems { get; set; }
     }

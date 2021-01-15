@@ -9,7 +9,7 @@ namespace Kursinis.Models
     public class CartItem
     {
         
-        public string Id { get; set; }
+        public int Id { get; set; }
         public virtual Products Products { get; set; }
         public int Amount { get; set; }
         public string ShoppingCartId { get; set; }

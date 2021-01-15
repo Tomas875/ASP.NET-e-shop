@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Kursinis.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Kursinis.Data;
+using Kursinis.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Kursinis.Controllers
 {
@@ -14,6 +16,7 @@ namespace Kursinis.Controllers
     {
         private readonly IProducts _productService;
         private readonly ShoppingCart _shoppingCart;
+       
 
         public ShoppingCartController(IProducts productService, ShoppingCart shoppingCart)
         {
@@ -46,7 +49,7 @@ namespace Kursinis.Controllers
         {
             var products = _productService.GetById(id);
             returnUrl = returnUrl.Replace("%2F", "/");
-            bool isValidAmount = false;
+            bool isValidAmount = true;
             if (products != null)
             {
                 isValidAmount = _shoppingCart.AddToCart(products, amount.Value);
@@ -54,10 +57,11 @@ namespace Kursinis.Controllers
 
             return Index(isValidAmount, returnUrl);
         }
-
-        public IActionResult Remove(int productId)
+        [HttpGet]
+        [Route("/ShoppingCart/Remove/{id}/{returnUrl?}")]
+        public IActionResult Remove(int productsId)
         {
-            var products = _productService.GetById(productId);
+            var products = _productService.GetById(productsId);
             if (products != null)
             {
                 _shoppingCart.RemoveFromCart(products);

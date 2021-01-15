@@ -21,17 +21,14 @@ namespace Kursinis.Data.Migrations
 
             modelBuilder.Entity("Kursinis.Models.CartItem", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
+                    b.Property<int>("Amount");
 
-                    b.Property<int?>("ProductsId")
-                        .HasColumnType("int");
+                    b.Property<int?>("ProductsId");
 
-                    b.Property<string>("ShoppingCartId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("ShoppingCartId");
 
                     b.HasKey("Id");
 

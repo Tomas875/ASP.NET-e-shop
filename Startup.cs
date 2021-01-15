@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace Kursinis
 {
@@ -37,8 +38,10 @@ namespace Kursinis
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddSession();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IProducts, ProductService>();
             services.AddScoped(sp => ShoppingCart.GetCart(sp));
+            
 
         }
 
@@ -58,8 +61,11 @@ namespace Kursinis
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            
+            app.UseSession();
 
             app.UseRouting();
+            
 
             app.UseAuthentication();
             app.UseAuthorization();
