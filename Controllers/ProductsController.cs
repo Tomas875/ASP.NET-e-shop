@@ -35,6 +35,13 @@ namespace Kursinis.Controllers
         {
             return View("Index", await _context.Products.Where( j => j.ItemName.Contains(SearchPhrase)).ToListAsync());
         }
+        public async Task<IActionResult> Search(string ProdSearch)
+        {
+            ViewData["GetProducts"] = ProdSearch;
+            
+            return View("Index", await _context.Products.Where(j => j.ItemName.Contains(ProdSearch)).ToListAsync());
+
+        }
 
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)

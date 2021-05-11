@@ -9,6 +9,12 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<form method="get" asp-action="Search">
+    <p>
+        <input type="search" placeholder="Enter product name" value="@ViewData["GetProducts"]" name="ProdSearch" style="width:500px;" />
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </p>
+</form>
 <table class="table">
     <thead>
         <tr>
@@ -21,7 +27,8 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
+ <tbody>
+
 @foreach (var item in Model) {
         <tr>
             <td>

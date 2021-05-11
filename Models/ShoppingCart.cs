@@ -69,7 +69,7 @@ namespace Kursinis.Models
 			_context.SaveChanges();
 			return isValidAmount;
 		}
-
+		//neveikia velnias
 		public int RemoveFromCart(Products products)
 		{
 			var shoppingCartItem = _context.ShoppingCartItems.SingleOrDefault(
