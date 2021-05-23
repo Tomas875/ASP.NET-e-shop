@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<Kursinis.Models.Products>
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@using Kursinis.Constants
 
 @{
     ViewData["Title"] = "Index";
@@ -7,7 +10,10 @@
 <h1>Index</h1>
 
 <p>
+    @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Products.Create)).Result.Succeeded)
+    {
     <a asp-action="Create">Create New</a>
+    }
 </p>
 <form method="get" asp-action="Search">
     <p>
@@ -20,35 +26,45 @@
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.ItemName)
-            </th>        
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
             <th></th>
         </tr>
     </thead>
- <tbody>
+    <tbody>
 
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ItemName)
-            </td>           
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                <form asp-controller="ShoppingCart" asp-action="Add" method="get" class="form-horizontal" role="form">
-                    <div class="btn-cart">
-                        <input value="Add to cart" type="submit" class="btn btn-success" asp-controller="ShoppingCart" asp-action="Add" asp-route-id="@item.Id" asp-route-returnUrl="@Context.Request.Path" />
-                    </div>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Products.Edit)).Result.Succeeded)
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    }
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Products.Delete)).Result.Succeeded)
+                    {
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    }
                     
-                </form>
-            </td>
-        </tr>
-}
+                    <form asp-controller="ShoppingCart" asp-action="Add" method="get" class="form-horizontal" role="form">
+                        <div class="btn-cart">
+                            <input value="Add to cart" type="submit" class="btn btn-success" asp-controller="ShoppingCart" asp-action="Add" asp-route-id="@item.Id" asp-route-returnUrl="@Context.Request.Path" />
+                        </div>
+
+                    </form>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+

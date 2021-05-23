@@ -60,17 +60,17 @@ namespace Kursinis.Controllers
 
             return View(products);
         }
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         // GET: Products/Create
         public IActionResult Create()
         {
             return View();
         }
-        
+
         // POST: Products/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,ItemName,ItemDescription,Price")] Products products)
@@ -83,7 +83,7 @@ namespace Kursinis.Controllers
             }
             return View(products);
         }
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -99,7 +99,7 @@ namespace Kursinis.Controllers
             }
             return View(products);
         }
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         // POST: Products/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -134,7 +134,7 @@ namespace Kursinis.Controllers
             }
             return View(products);
         }
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         // GET: Products/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -154,7 +154,7 @@ namespace Kursinis.Controllers
         }
 
         // POST: Products/Delete/5
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
