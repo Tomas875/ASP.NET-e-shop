@@ -9,7 +9,8 @@ namespace Kursinis.Constants
 
     {
         Admin,
-        Basic
+        Basic,
+        Mod
 
     }
 }

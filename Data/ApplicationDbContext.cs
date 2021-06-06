@@ -28,6 +28,8 @@ namespace Kursinis.Data
         }
         public DbSet<Kursinis.Models.Products> Products { get; set; }
         public DbSet<Kursinis.Models.CartItem> ShoppingCartItems { get; set; }
+        public DbSet<Kursinis.Models.Category> Category { get; set; }
+
     }
     
 }

@@ -46,6 +46,7 @@ namespace Kursinis.Controllers
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            ViewData["CategoryId"] = new SelectList(_context.Category.ToList(), "Id", "CategoryName");
             if (id == null)
             {
                 return NotFound();
@@ -60,20 +61,21 @@ namespace Kursinis.Controllers
 
             return View(products);
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         // GET: Products/Create
         public IActionResult Create()
         {
+            ViewData["CategoryId"] = new SelectList(_context.Category.ToList(), "Id", "CategoryName");
             return View();
         }
 
         // POST: Products/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ItemName,ItemDescription,Price")] Products products)
+        public async Task<IActionResult> Create([Bind("Id,ItemName,ItemDescription,Price,Category")] Products products)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +85,7 @@ namespace Kursinis.Controllers
             }
             return View(products);
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin, Mod")]
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -91,7 +93,7 @@ namespace Kursinis.Controllers
             {
                 return NotFound();
             }
-
+            ViewData["CategoryId"] = new SelectList(_context.Category.ToList(), "Id", "CategoryName");
             var products = await _context.Products.FindAsync(id);
             if (products == null)
             {
@@ -99,7 +101,7 @@ namespace Kursinis.Controllers
             }
             return View(products);
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin,Mod")]
         // POST: Products/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -134,7 +136,7 @@ namespace Kursinis.Controllers
             }
             return View(products);
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         // GET: Products/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -154,7 +156,7 @@ namespace Kursinis.Controllers
         }
 
         // POST: Products/Delete/5
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

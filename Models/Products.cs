@@ -12,6 +12,9 @@ namespace Kursinis.Models
 
         public string ItemName { get; set; }
         public string ItemDescription { get; set; }
+        public int CategoryTypeId { get; set; }
+        public Category Category { get; set; }
+        
 
 
 

@@ -44,12 +44,12 @@ namespace Kursinis
             services.AddScoped(sp => ShoppingCart.GetCart(sp));
             services.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
             services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<IdentityUser, IdentityRole>()
                     .AddEntityFrameworkStores<ApplicationDbContext>()
                     .AddDefaultUI()
-            .AddDefaultTokenProviders();
+                    .AddDefaultTokenProviders();
             
+
 
 
         }
