@@ -2,7 +2,7 @@
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 @using Kursinis.Constants
-
+@using PagedList.Mvc
 @{
     ViewData["Title"] = "Index";
 }
@@ -12,15 +12,23 @@
 <p>
     @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Products.Create)).Result.Succeeded)
     {
-    <a asp-action="Create">Create New</a>
+        <a asp-action="Create">Create New</a>
     }
 </p>
-<form method="get" asp-action="Search">
+<form method="get" asp-action="SearchByName">
     <p>
         <input type="search" placeholder="Enter product name" value="@ViewData["GetProducts"]" name="ProdSearch" style="width:500px;" />
         <input type="submit" value="Search" class="btn btn-primary" />
     </p>
 </form>
+<form method="get" asp-action="SearchByCategory">
+    <p>
+        <input type="search" placeholder="Enter category ID" value="@ViewData["GetProducts"]" name="ProdSearch" style="width:500px;" />
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </p>
+</form>
+
+
 <table class="table">
     <thead>
         <tr>
@@ -29,6 +37,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryId)
             </th>
             <th></th>
         </tr>
@@ -45,6 +56,9 @@
                     @Html.DisplayFor(modelItem => item.Price)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.CategoryId)
+                </td>
+                <td>
                     @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Products.Edit)).Result.Succeeded)
                     {
                         <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
@@ -52,9 +66,9 @@
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a>
                     @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Products.Delete)).Result.Succeeded)
                     {
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                     }
-                    
+
                     <form asp-controller="ShoppingCart" asp-action="Add" method="get" class="form-horizontal" role="form">
                         <div class="btn-cart">
                             <input value="Add to cart" type="submit" class="btn btn-success" asp-controller="ShoppingCart" asp-action="Add" asp-route-id="@item.Id" asp-route-returnUrl="@Context.Request.Path" />
@@ -66,5 +80,6 @@
         }
     </tbody>
 </table>
+
 
 

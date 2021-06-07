@@ -1,0 +1,15 @@
+﻿@using Kursinis.Models
+@model List<Category>
+
+<ul>
+    @{
+        foreach (var item in Model)
+        {
+            @*<li><a href="#">@item.Name</a></li>*@
+            <li>
+                @Html.ActionLink(@item.CategoryName, "Index", "Products", new {category = @item.Id }, null)
+            </li>
+        }
+    }
+
+</ul>
