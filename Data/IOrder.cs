@@ -7,12 +7,12 @@ using Kursinis.Enums;
 
 namespace Kursinis.Data
 {
-    public interface IOrder
-    {
+	public interface IOrder
+	{
 		void CreateOrder(Order order);
 		Order GetById(int orderId);
-		
+
 		IEnumerable<Order> GetAll();
-		
+
 	}
 }

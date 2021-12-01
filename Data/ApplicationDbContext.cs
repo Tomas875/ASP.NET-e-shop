@@ -23,8 +23,9 @@ namespace Kursinis.Data
 
             modelBuilder.Entity<CartItem>()
                 .HasOne(sci => sci.Products);
+            
 
-         
+
         }
         public DbSet<Kursinis.Models.Products> Products { get; set; }
         public DbSet<Kursinis.Models.CartItem> ShoppingCartItems { get; set; }

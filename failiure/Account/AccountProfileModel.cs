@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -14,8 +14,7 @@ namespace Kursinis.Models.Account
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         
-        public decimal Balance { get; set; }
-        public string BalanceFormat { get => Balance.ToString("c", CultureInfo.CreateSpecificCulture("en-US")); }
+        
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
         public string City { get; set; }
@@ -29,3 +28,4 @@ namespace Kursinis.Models.Account
         
     }
 }
+*/

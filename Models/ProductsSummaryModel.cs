@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Kursinis.Models
+namespace Kursinis.Views.Products
 {
-    public class ProductSummaryModel
+    public class ProductsSummaryModel
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string ItemName { get; set; }
     }
 }

@@ -8,7 +8,7 @@
     <title>@ViewData["Title"] - Tomo Janciausko Kursinis</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet"/>
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet" />
 </head>
 <body>
     <header>
@@ -69,11 +69,9 @@
             }
             val += num;
             target.value = val;
-
             let totalInt = val * parseFloat(total.substring(1));
             output.value = ('$' + totalInt).substring(0, 6);
         }
-
         function readUrl(input, id) {
             if (input && input.value) {
                 $('#' + id).attr('src', input.value);

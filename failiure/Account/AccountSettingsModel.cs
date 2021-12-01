@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -6,25 +6,31 @@ using System.Threading.Tasks;
 
 namespace Kursinis.Models.Account
 {
-    public class AccountRegisterModel
+    public class AccountSettingsModel
     {
-        [Required(ErrorMessage = "Password is required")]
+        public string Id { get; set; }
+
+        [Required(ErrorMessage = "Please select role")]
+        public string RoleId { get; set; }
+
+        [RegularExpression(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$", ErrorMessage = @"Incorrect password")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Old password")]
+        public string OldPassword { get; set; }
+
+        [DataType(DataType.Password)]
         [RegularExpression(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$",
             ErrorMessage = @"Password must be at least 4 characters, 
 no more than 8 characters, and must include at least one upper case letter, 
 one lower case letter, and one numeric digit")]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
+        [Display(Name = "New password")]
+        public string NewPassword { get; set; }
 
-        [Required(ErrorMessage = "Confirm password")]
         [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "Passwords did not match")]
-        [Display(Name = "Confirm password")]
-        public string PasswordConfirmation { get; set; }
+        [Compare("NewPassword", ErrorMessage = "Passwords did not match")]
+        [Display(Name = "Confirm new password")]
+        public string NewPasswordConfirmation { get; set; }
 
-        [Required(ErrorMessage = "Email is required")]
-        [RegularExpression(@"^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$", ErrorMessage = "Enter valid email")]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -38,6 +44,7 @@ one lower case letter, and one numeric digit")]
         [StringLength(255, ErrorMessage = "Last name must have from 2 to 255 characters", MinimumLength = 2)]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+
 
         [Display(Name = "Addres line 1")]
         public string AddressLine1 { get; set; }
@@ -57,7 +64,6 @@ one lower case letter, and one numeric digit")]
 
         [Display(Name = "Phone number")]
         public string PhoneNumber { get; set; }
-
-        public string ReturnUrl { get; set; }
     }
 }
+*/

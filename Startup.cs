@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 using Kursinis.Permission;
 using Microsoft.AspNetCore.Authentication.Google;
+using Kursinis.Hubs;
 
 
 namespace Kursinis
@@ -31,7 +32,7 @@ namespace Kursinis
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            
+            services.AddSignalR();
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddSession();
@@ -45,8 +46,8 @@ namespace Kursinis
                     .AddEntityFrameworkStores<ApplicationDbContext>()
                     .AddDefaultUI()
                     .AddDefaultTokenProviders();
-            
-        
+
+
 
 
         }
@@ -62,21 +63,22 @@ namespace Kursinis
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                
+
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            
+
             app.UseSession();
 
             app.UseRouting();
-            
+
 
             app.UseAuthentication();
             app.UseAuthorization();
 
-            
+
+
 
             app.UseEndpoints(endpoints =>
             {
@@ -84,6 +86,7 @@ namespace Kursinis
                     name: "default",
                     pattern: "{controller=Products}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+                endpoints.MapHub<ChatHub>("/Chat/Index");
             });
         }
     }

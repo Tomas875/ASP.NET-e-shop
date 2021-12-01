@@ -16,7 +16,7 @@ namespace Kursinis.Controllers
         private readonly IOrder _orderService;
         private readonly IProducts _productService;
         private readonly ShoppingCart _shoppingCart;
-        
+
 
 
 
@@ -25,7 +25,7 @@ namespace Kursinis.Controllers
             _orderService = orderService;
             _shoppingCart = shoppingCart;
             _productService = productService;
-            
+
         }
 
         public IActionResult Checkout()
@@ -92,4 +92,3 @@ namespace Kursinis.Controllers
         }
     }
 }
-

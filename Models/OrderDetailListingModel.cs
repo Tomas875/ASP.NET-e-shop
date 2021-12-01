@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Kursinis.Views.Products;
 
 namespace Kursinis.Models
 {
@@ -13,7 +14,7 @@ namespace Kursinis.Models
         public int Amount { get; set; }
         public int Price { get; set; }
 
-        public ProductSummaryModel Products { get; set; }
+        public ProductsSummaryModel Products { get; set; }
 
     }
 }

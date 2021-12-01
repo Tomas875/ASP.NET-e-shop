@@ -41,7 +41,7 @@ namespace Kursinis.Data
                         Products = item.Products
                     });
                 _context.Update(item.Products);
-                
+
             }
 
             _context.OrderDetails.AddRange(orderDetails);
@@ -54,9 +54,9 @@ namespace Kursinis.Data
                 .FirstOrDefault(order => order.Id == orderId);
         }
 
-        
 
-        
+
+
 
         private void SetOrderBy(IEnumerable<Order> orders, OrderBy orderBy)
         {
@@ -77,9 +77,9 @@ namespace Kursinis.Data
             }
         }
 
-        
 
-        
+
+
 
         public IEnumerable<Order> GetAll()
         {
