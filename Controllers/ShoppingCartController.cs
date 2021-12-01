@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Kursinis.Data;
 using Kursinis.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 
 namespace Kursinis.Controllers
 {
@@ -73,6 +74,9 @@ namespace Kursinis.Controllers
         {
             return Redirect(returnUrl);
         }
+
+        
+
     }
 }
 

@@ -3,11 +3,13 @@
 @inject IAuthorizationService AuthorizationService
 @using Kursinis.Constants
 @using PagedList.Mvc
-@{
-    ViewData["Title"] = "Index";
-}
 
-<h1>Index</h1>
+<head>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+
+
+
 
 <p>
     @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Products.Create)).Result.Succeeded)
@@ -21,12 +23,7 @@
         <input type="submit" value="Search" class="btn btn-primary" />
     </p>
 </form>
-<form method="get" asp-action="SearchByCategory">
-    <p>
-        <input type="search" placeholder="Enter category ID" value="@ViewData["GetProducts"]" name="ProdSearch" style="width:500px;" />
-        <input type="submit" value="Search" class="btn btn-primary" />
-    </p>
-</form>
+
 
 
 <table class="table">
@@ -38,9 +35,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CategoryId)
-            </th>
+
             <th></th>
         </tr>
     </thead>
@@ -55,9 +50,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Price)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CategoryId)
-                </td>
+                
                 <td>
                     @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Products.Edit)).Result.Succeeded)
                     {

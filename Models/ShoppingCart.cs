@@ -86,9 +86,10 @@ namespace Kursinis.Models
 				{
 					_context.ShoppingCartItems.Remove(shoppingCartItem);
 				}
+				_context.SaveChanges();
 			}
 
-			_context.SaveChanges();
+			
 			return localAmount;
 		}
 
@@ -104,8 +105,11 @@ namespace Kursinis.Models
 			var cartItems = _context
 				.ShoppingCartItems
 				.Where(cart => cart.ShoppingCartId == Id);
+			foreach (var cartItem in cartItems)
+            {
+				_context.ShoppingCartItems.RemoveRange(cartItem);
+			}
 
-			_context.ShoppingCartItems.RemoveRange(cartItems);
 			_context.SaveChanges();
 		}
 
@@ -114,5 +118,7 @@ namespace Kursinis.Models
 			return _context.ShoppingCartItems.Where(c => c.ShoppingCartId == Id)
 				.Select(c => c.Products.Price * c.Amount).Sum();
 		}
+
+		
 	}
 }

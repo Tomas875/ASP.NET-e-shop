@@ -3,20 +3,16 @@ using Kursinis.Controllers;
 using Kursinis.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 using Kursinis.Permission;
+using Microsoft.AspNetCore.Authentication.Google;
+
 
 namespace Kursinis
 {
@@ -41,6 +37,7 @@ namespace Kursinis
             services.AddSession();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IProducts, ProductService>();
+            services.AddTransient<IOrder, OrderService>();
             services.AddScoped(sp => ShoppingCart.GetCart(sp));
             services.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
             services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
@@ -49,7 +46,7 @@ namespace Kursinis
                     .AddDefaultUI()
                     .AddDefaultTokenProviders();
             
-
+        
 
 
         }
@@ -65,7 +62,7 @@ namespace Kursinis
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
@@ -78,6 +75,8 @@ namespace Kursinis
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            
 
             app.UseEndpoints(endpoints =>
             {
