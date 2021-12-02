@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
-
+using Kursinis.Models;
 
 namespace Kursinis
 {
@@ -24,7 +24,7 @@ namespace Kursinis
                 var logger = loggerFactory.CreateLogger("app");
                 try
                 {
-                    var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+                    var userManager = services.GetRequiredService<UserManager<AppUser>>();
                     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
                     await Seeds.DefaultRoles.SeedAsync(userManager, roleManager);
                     await Seeds.DefaultUsers.SeedBasicUserAsync(userManager, roleManager);

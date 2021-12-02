@@ -40,18 +40,28 @@
     <Compile Remove="Data\Migrations\20211130200722_order2.Designer.cs" />
     <Compile Remove="Data\Migrations\20211201152517_order2.cs" />
     <Compile Remove="Data\Migrations\20211201152517_order2.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211201205123_chat.cs" />
+    <Compile Remove="Data\Migrations\20211201205123_chat.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211201205329_chat.cs" />
+    <Compile Remove="Data\Migrations\20211201205329_chat.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211201215651_what.cs" />
+    <Compile Remove="Data\Migrations\20211201215651_what.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNet.SignalR.JS" Version="2.4.2" />
+    <None Include="wwwroot\lib\signalr\signalr.min.js" />
+    <None Include="wwwroot\signalr\signalr.js" />
+    <None Include="wwwroot\signalr\signalr.js.map" />
+    <None Include="wwwroot\signalr\signalr.min.js" />
+    <None Include="wwwroot\signalr\signalr.min.js.map" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.21" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.8" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.21" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.21" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.21" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.21">

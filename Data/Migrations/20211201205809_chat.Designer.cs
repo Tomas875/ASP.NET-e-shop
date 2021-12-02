@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kursinis.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211201155516_order2")]
-    partial class order2
+    [Migration("20211201205809_chat")]
+    partial class chat
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -59,6 +59,34 @@ namespace Kursinis.Data.Migrations
                     b.ToTable("Category");
                 });
 
+            modelBuilder.Entity("Kursinis.Models.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("When")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Message");
+                });
+
             modelBuilder.Entity("Kursinis.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -81,15 +109,10 @@ namespace Kursinis.Data.Migrations
                     b.Property<int>("OrderTotal")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("ZipCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -350,35 +373,11 @@ namespace Kursinis.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Kursinis.Models.ApplicationUser", b =>
+            modelBuilder.Entity("Kursinis.Models.AppUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<string>("AddressLine1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AddressLine2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("MemberSince")
-                        .HasColumnType("datetime2");
-
-                    b.HasDiscriminator().HasValue("ApplicationUser");
+                    b.HasDiscriminator().HasValue("AppUser");
                 });
 
             modelBuilder.Entity("Kursinis.Models.CartItem", b =>
@@ -388,11 +387,11 @@ namespace Kursinis.Data.Migrations
                         .HasForeignKey("ProductsId");
                 });
 
-            modelBuilder.Entity("Kursinis.Models.Order", b =>
+            modelBuilder.Entity("Kursinis.Models.Message", b =>
                 {
-                    b.HasOne("Kursinis.Models.ApplicationUser", "User")
-                        .WithMany("Orders")
-                        .HasForeignKey("UserId");
+                    b.HasOne("Kursinis.Models.AppUser", "Sender")
+                        .WithMany("Messages")
+                        .HasForeignKey("UserID");
                 });
 
             modelBuilder.Entity("Kursinis.Models.OrderDetail", b =>

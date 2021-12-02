@@ -23,6 +23,10 @@ namespace Kursinis.Data
 
             modelBuilder.Entity<CartItem>()
                 .HasOne(sci => sci.Products);
+            modelBuilder.Entity<Message>()
+                .HasOne<AppUser>(a => a.Sender)
+                .WithMany(d => d.Messages)
+                .HasForeignKey(d => d.UserID);
             
 
 
@@ -32,6 +36,7 @@ namespace Kursinis.Data
         public DbSet<Kursinis.Models.Category> Category { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<Message> Messages { get; set; }
         //public DbSet<Cart> Carts { get; set; }
 
 

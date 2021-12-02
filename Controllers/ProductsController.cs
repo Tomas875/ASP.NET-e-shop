@@ -15,6 +15,7 @@ namespace Kursinis.Controllers
     {
         private readonly ApplicationDbContext _context;
 
+
         public ProductsController(ApplicationDbContext context)
         {
             _context = context;

@@ -1,4 +1,5 @@
 ﻿using Kursinis.Constants;
+using Kursinis.Models;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,9 @@ namespace Kursinis.Seeds
 {
     public static class DefaultUsers
     {
-        public static async Task SeedBasicUserAsync(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public static async Task SeedBasicUserAsync(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
         {
-            var defaultUser = new IdentityUser
+            var defaultUser = new AppUser
             {
                 Email = "baisc@basic.com",
                 EmailConfirmed = true
@@ -27,9 +28,9 @@ namespace Kursinis.Seeds
                 }
             }
         }
-        public static async Task SeedAdminAsync(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public static async Task SeedAdminAsync(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
         {
-            var defaultUser = new IdentityUser
+            var defaultUser = new AppUser
             {
                 Email = "admin@admin.com",
                 EmailConfirmed = true

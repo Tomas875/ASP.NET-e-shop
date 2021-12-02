@@ -42,7 +42,7 @@ namespace Kursinis
             services.AddScoped(sp => ShoppingCart.GetCart(sp));
             services.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
             services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<AppUser, IdentityRole>()
                     .AddEntityFrameworkStores<ApplicationDbContext>()
                     .AddDefaultUI()
                     .AddDefaultTokenProviders();
@@ -82,11 +82,12 @@ namespace Kursinis
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<ChatHub>("/Home/Index");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Products}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
-                endpoints.MapHub<ChatHub>("/Chat/Index");
+                
             });
         }
     }
