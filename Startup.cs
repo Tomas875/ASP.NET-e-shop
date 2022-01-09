@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 using Kursinis.Permission;
 using Microsoft.AspNetCore.Authentication.Google;
 using Kursinis.Hubs;
-
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace Kursinis
 {
@@ -46,11 +46,12 @@ namespace Kursinis
                     .AddEntityFrameworkStores<ApplicationDbContext>()
                     .AddDefaultUI()
                     .AddDefaultTokenProviders();
-
+            
 
 
 
         }
+        
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

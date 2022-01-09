@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 
 using System.Linq;
@@ -13,4 +13,4 @@ namespace Kursinis.Models
 
         public virtual ICollection<Products> Products { get; set; }
     }
-}
+}*/

@@ -2,6 +2,7 @@
 
 using Kursinis.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,18 +14,21 @@ namespace Kursinis.Controllers
     [Authorize]
     public class OrderController : Controller
     {
-        private readonly IOrder _orderService;
+        
         private readonly IProducts _productService;
+        private readonly IOrder _orderService;
         private readonly ShoppingCart _shoppingCart;
+        public readonly UserManager<AppUser> _userManager;
 
 
 
 
-        public OrderController(IOrder orderService, IProducts productService, ShoppingCart shoppingCart)
+        public OrderController(IOrder orderService, IProducts productService, ShoppingCart shoppingCart, UserManager<AppUser> userManager)
         {
             _orderService = orderService;
             _shoppingCart = shoppingCart;
             _productService = productService;
+            _userManager = userManager;
 
         }
 
@@ -39,7 +43,7 @@ namespace Kursinis.Controllers
             }
             return View();
         }
-        public Order OrderIndexModelToOrder(OrderIndexModel model)
+        public Order OrderIndexModelToOrder(OrderIndexModel model, AppUser user)
         {
             return new Order
             {
@@ -55,9 +59,9 @@ namespace Kursinis.Controllers
         }
 
 
-        //thois shit borked
+        
         [HttpPost]
-        public IActionResult Checkout(OrderIndexModel model)
+        public async Task<IActionResult> Checkout(OrderIndexModel model)
         {
             var items = _shoppingCart.GetShoppingCartItems();
             _shoppingCart.ShoppingCartItems = items;
@@ -70,11 +74,11 @@ namespace Kursinis.Controllers
 
             if (ModelState.IsValid)
             {
-
+                var userId = _userManager.GetUserId(User);
+                var user = await _userManager.FindByIdAsync(userId);
 
                 model.OrderTotal = items.Sum(item => item.Amount * item.Products.Price);
-                var order = OrderIndexModelToOrder(model);
-
+                var order = OrderIndexModelToOrder(model, user);
 
                 _orderService.CreateOrder(order);
                 _shoppingCart.ClearCart();

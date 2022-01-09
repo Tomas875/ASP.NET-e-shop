@@ -107,10 +107,15 @@ namespace Kursinis.Data.Migrations
                     b.Property<int>("OrderTotal")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("ZipCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -157,6 +162,9 @@ namespace Kursinis.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ItemName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Picture")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Price")
@@ -390,6 +398,13 @@ namespace Kursinis.Data.Migrations
                     b.HasOne("Kursinis.Models.AppUser", "Sender")
                         .WithMany("Messages")
                         .HasForeignKey("UserID");
+                });
+
+            modelBuilder.Entity("Kursinis.Models.Order", b =>
+                {
+                    b.HasOne("Kursinis.Models.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Kursinis.Models.OrderDetail", b =>

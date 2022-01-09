@@ -33,7 +33,7 @@ namespace Kursinis.Data
         }
         public DbSet<Kursinis.Models.Products> Products { get; set; }
         public DbSet<Kursinis.Models.CartItem> ShoppingCartItems { get; set; }
-        public DbSet<Kursinis.Models.Category> Category { get; set; }
+        //public DbSet<Kursinis.Models.Category> Category { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Message> Messages { get; set; }

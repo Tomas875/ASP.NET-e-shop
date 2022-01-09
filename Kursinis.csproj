@@ -46,6 +46,16 @@
     <Compile Remove="Data\Migrations\20211201205329_chat.Designer.cs" />
     <Compile Remove="Data\Migrations\20211201215651_what.cs" />
     <Compile Remove="Data\Migrations\20211201215651_what.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211202114724_cat9.cs" />
+    <Compile Remove="Data\Migrations\20211202114724_cat9.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211202115300_what2.cs" />
+    <Compile Remove="Data\Migrations\20211202115300_what2.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211202115459_cat6.cs" />
+    <Compile Remove="Data\Migrations\20211202115459_cat6.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211202115855_cat6.cs" />
+    <Compile Remove="Data\Migrations\20211202115855_cat6.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211202120101_cat6.cs" />
+    <Compile Remove="Data\Migrations\20211202120101_cat6.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -86,6 +96,10 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 </Project>

@@ -40,7 +40,7 @@ namespace Kursinis.Data
                         Price = item.Products.Price,
                         Products = item.Products
                     });
-                _context.Update(item.Products);
+                
 
             }
 

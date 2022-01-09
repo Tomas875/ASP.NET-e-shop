@@ -15,9 +15,11 @@ namespace Kursinis.Models
         public string ItemName { get; set; }
         public string ItemDescription { get; set; }
         
-        public int CategoryId { get; set; }
+        //public int CategoryId { get; set; }
         
-        public virtual  Category Category { get; set; }
+        //public virtual  Category Category { get; set; }
+
+        public string Picture { get; set; }
         
 
 

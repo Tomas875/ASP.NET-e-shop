@@ -22,8 +22,8 @@ namespace Kursinis.Models
         public int OrderTotal { get; set; }
 
         public DateTime OrderPlaced { get; set; }
-        //public string UserId { get; set; }
-        //public ApplicationUser User { get; set; }
+        public string UserId { get; set; }
+        public AppUser User { get; set; }
 
         
 

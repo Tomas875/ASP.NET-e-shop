@@ -8,34 +8,42 @@ using Kursinis.Models;
 using System.Web;
 using System.Net;
 using System;
+using Microsoft.AspNetCore.Hosting;
+using Kursinis.ViewModels;
+using System.IO;
+using Microsoft.AspNetCore.Cors;
 
 namespace Kursinis.Controllers
 {
+    
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
 
-        public ProductsController(ApplicationDbContext context)
+        
+        public ProductsController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         // GET: Products
-        public async Task<IActionResult> Index(string category, string search)
+        public async Task<IActionResult> Index()
         { 
            return View(await _context.Products.ToListAsync());
         }
         public PartialViewResult ProductListPartial(int? category)
         {
-          
+
             if (category != null)
             {
                 ViewBag.category = category;
                 var productList = _context.Products
                                 .OrderByDescending(x => x.Id)
                                 .Where(x => x.Id == category);
-                                
+
                 return PartialView(productList);
             }
             else
@@ -44,6 +52,7 @@ namespace Kursinis.Controllers
                 return PartialView(productList);
             }
         }
+
 
         // GET: ShowSearchForm
         public async Task<IActionResult> ShowSearchForm()
@@ -60,17 +69,13 @@ namespace Kursinis.Controllers
             ViewData["GetProducts"] = ProdSearch;
             return View("Index", await _context.Products.Where(j => j.ItemName.Contains(ProdSearch)).ToListAsync());
         }
-        public async Task<IActionResult> SearchByCategory(int ProdSearch)
-        {
-            ViewData["GetProducts"] = ProdSearch;
-            return View("Index", await _context.Products.Where(j => j.CategoryId == ProdSearch).ToListAsync());
-        }
+        
 
 
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            ViewData["CategoryId"] = new SelectList(_context.Category.ToList(), "Id", "CategoryName");
+            
             if (id == null)
             {
                 return NotFound();
@@ -89,17 +94,15 @@ namespace Kursinis.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Category.ToList(), "Id", "CategoryName");
+           
             return View();
         }
 
         // POST: Products/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         //[Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ItemName,ItemDescription,Price,CategoryId")] Products products)
+        public async Task<IActionResult> Create([Bind("Id,ItemName,ItemDescription,Price")] Products products)
         {
             if (ModelState.IsValid)
             {
@@ -107,9 +110,26 @@ namespace Kursinis.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            
+
             return View(products);
         }
+
+        /*private string UploadedFile(ProductViewModel model)
+        {
+            string uniqueFileName = null;
+
+            if (model.Picture != null)
+            {
+                string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Picture.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    model.Picture.CopyTo(fileStream);
+                }
+            }
+            return uniqueFileName;
+        }*/
         //[Authorize(Roles = "Admin, Mod")]
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -124,16 +144,14 @@ namespace Kursinis.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Category.ToList(), "Id", "CategoryName");
+            
             return View(products);
         }
         //[Authorize(Roles = "Admin,Mod")]
         // POST: Products/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ItemName,ItemDescription,Price,CategoryId")] Products products)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ItemName,ItemDescription,Price")] Products products)
         {
             if (id != products.Id)
             {
