@@ -2,13 +2,13 @@
 E-Shop projektas padarytas su ASP.NET ir naudojantis EF
 
 Features:
-Register/login
-CRUD
-Roles with adjustable permissions
-Cart
-User list and abillity to asign roles to selected user's through the interface
-Search
-Simple profile
+Register/login;
+CRUD;
+Roles with adjustable permissions;
+Cart;
+User list and abillity to asign roles to selected user's through the interface;
+Search;
+Simple profile.
 
 Couple of screenshots:
 
